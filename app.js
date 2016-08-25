@@ -28,11 +28,11 @@ api.createMenu(menu_config, function(err, result){
 app.use(express.query());
 app.use('/wechat', wechat(wx_config, function (req, res, next) {
     var message = req.weixin;
-    var content = message.content;
-    if(message.indexOf("s") == 0){
-      message = message.substr(1);
+    var content = message.Content;
+    if(content.indexOf("s") == 0){
+      content = content.substr(1);
       process.nextTick(function(){
-        robot.crawl_query(robot_config, res, message);
+        robot.crawl_query(crawl_config, res, content);
       });
     }else{
       process.nextTick(function(){
