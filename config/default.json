@@ -10,6 +10,17 @@
     "host": "127.0.0.1",
     "port": "5001"
   },
+  "robot": {
+    "app_id": "7fa2dfd43b8c33c768ebe69922e4c92c",
+    "app_secret": "ul1xwn79n8gf"
+  },
+  "scrapy_mongo": {
+    "host": "139.196.7.26",
+    "port": "27017",
+    "db": "corporation",
+    "user": "corp",
+    "password": "corp"
+  },
   "wx": {
     "app_id": "wx64e6be6c608872a0",
     "app_secret": "8cc37a2a4e7bd5c689693bedc623a7f8",

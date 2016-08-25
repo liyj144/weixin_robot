@@ -23,5 +23,9 @@
     "Jesse Yang <jyyjcc@gmail.com> (http://github.com/ktmud)",
     "TZ <atian25@qq.com> (http://atian25.iteye.com/)"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "mongodb": "^2.2.8",
+    "supervisor": "^0.11.0"
+  }
 }

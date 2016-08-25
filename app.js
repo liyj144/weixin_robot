@@ -10,27 +10,43 @@ var menu_config = config.get('wx.wx_menu');
 var app_id      = config.get('wx.app_id');
 var token  = config.get('wx.token');
 var app_secret  = config.get('wx.app_secret');
+var robot_config = config.get("robot");
+var crawl_config = config.get("scrapy_mongo");
 var encodingAESKey  = config.get('wx.encodingAESKey');
 
 var wx_config = {
-  token: token,
-  appid: app_id,
-  encodingAESKey: encodingAESKey
+    token: token,
+    appid: app_id,
+    encodingAESKey: encodingAESKey
 };
 
 var api = new API(app_id, app_secret);
 api.createMenu(menu_config, function(err, result){
-  console.log(result);
+    console.log(result);
 });
 
 app.use(express.query());
 app.use('/wechat', wechat(wx_config, function (req, res, next) {
-  var message = req.weixin;
-   //console.log(req, message, message.FromUserName)
-   process.nextTick(function(){
-      robot.moli_rb(res, message);
-   });
+    var message = req.weixin;
+    var content = message.content;
+    if(message.indexOf("s") == 0){
+      message = message.substr(1);
+      process.nextTick(function(){
+        robot.crawl_query(robot_config, res, message);
+      });
+    }else{
+      process.nextTick(function(){
+        robot.moli_rb(robot_config, res, message);
+      });
+    }
+    
 }));
+// for test
+app.get('/crawl', function(req, res){
+  process.nextTick(function(){
+    robot.crawl_query(crawl_config, res, req.query.q);
+  })
+});
 
 
 http.listen(1234, function(){
