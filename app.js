@@ -39,7 +39,7 @@ app.use('/wechat', wechat(wx_config, function (req, res, next) {
       });
     }else{
       process.nextTick(function(){
-        robot.moli_rb(robot_config, res, message);
+        robot.moli_rb(robot_config, res, content);
       });
     }
     
