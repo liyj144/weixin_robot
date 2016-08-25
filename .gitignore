@@ -30,3 +30,4 @@ migrations
 nohup.out
 test/
 node_modules/
+node_release.log
