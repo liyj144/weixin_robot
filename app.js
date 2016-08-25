@@ -28,6 +28,9 @@ api.createMenu(menu_config, function(err, result){
 app.use(express.query());
 app.use('/wechat', wechat(wx_config, function (req, res, next) {
     var message = req.weixin;
+    if(!message || !message.Content){
+      res.reply("给我点提示嘛，亲...");
+    }
     var content = message.Content;
     if(content.indexOf("s") == 0){
       content = content.substr(1);
@@ -44,7 +47,8 @@ app.use('/wechat', wechat(wx_config, function (req, res, next) {
 // for test
 app.get('/crawl', function(req, res){
   process.nextTick(function(){
-    robot.crawl_query(crawl_config, res, req.query.q);
+    //robot.crawl_query(crawl_config, res, req.query.q);
+    robot.moli_rb(robot_config, res, req.query.q);
   })
 });
 
