@@ -29,3 +29,4 @@ jrtool/*.pyc
 migrations
 nohup.out
 test/
+node_modules/
