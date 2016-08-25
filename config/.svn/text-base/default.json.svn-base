@@ -1,0 +1,103 @@
+{
+  "domain": "liyanjie.top",
+  "is_debug": true,
+  "mongodb": {
+    "host": "127.0.0.1",
+    "port": "27017",
+    "db": "node-webot"
+  },
+  "sms": {
+    "host": "127.0.0.1",
+    "port": "5001"
+  },
+  "wx": {
+    "app_id": "wx64e6be6c608872a0",
+    "app_secret": "8cc37a2a4e7bd5c689693bedc623a7f8",
+    "token": "e8550d38f57cb698cee1e7c6a0ef2892",
+    "encodingAESKey": "0f4FpfPUxsgTaLlSJh14du82TRbF7n6LYlESpiPDrxa",
+    "wx_menu": {
+      "button": [
+        {
+          "name": "网址收藏",
+          "sub_button": [
+            {
+              "type": "view",
+              "name": "叶落寒山",
+              "url": "http://blog.liyanjie.top/"
+            },
+            {
+              "type": "view",
+              "name": "搜房网",
+              "url": "http://sh.fang.com/"
+            },
+            {
+              "type": "view",
+              "name": "开源中国",
+              "url": "http://www.oschina.net/"
+            },
+            {
+              "type": "view",
+              "name": "开发者头条",
+              "url": "http://toutiao.io/"
+            }
+          ]
+        },
+        {
+          "name": "和我互动",
+          "sub_button": [
+            { 
+              "type":"click",
+              "name":"今日歌曲",
+              "key":"V1001_TODAY_MUSIC"
+            },
+            {
+               "type":"click",
+               "name":"赞一下我们",
+               "key":"V1001_GOOD"
+            },
+            {
+                "type": "scancode_waitmsg", 
+                "name": "扫码带提示", 
+                "key": "rselfmenu_0_0", 
+                "sub_button": [ ]
+            }, 
+            {
+                "type": "scancode_push", 
+                "name": "扫码推事件", 
+                "key": "rselfmenu_0_1", 
+                "sub_button": [ ]
+            },
+            {
+                "name": "发送位置", 
+                "type": "location_select", 
+                "key": "rselfmenu_2_0"
+            }
+          ]
+        },
+        {
+          "name": "工具",
+          "sub_button": [
+              {
+                  "type": "pic_sysphoto", 
+                  "name": "系统拍照发图", 
+                  "key": "rselfmenu_1_0", 
+                 "sub_button": [ ]
+               }, 
+              {
+                  "type": "pic_photo_or_album", 
+                  "name": "拍照或者相册发图", 
+                  "key": "rselfmenu_1_1", 
+                  "sub_button": [ ]
+              }, 
+              {
+                  "type": "pic_weixin", 
+                  "name": "微信相册发图", 
+                  "key": "rselfmenu_1_2", 
+                  "sub_button": [ ]
+              }
+          ]
+        }
+      ]
+    }
+  }
+}
