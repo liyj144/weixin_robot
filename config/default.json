@@ -16,7 +16,8 @@
   },
   "tuling_config": {
     "url": "http://www.tuling123.com/openapi/api",
-    "app_id": "755c4c4ccc26401aa31c316e2e2933bd"
+    "app_id": "755c4c4ccc26401aa31c316e2e2933bd",
+    "loc": "上海市杨浦区"
   },
   "scrapy_mongo": {
     "host": "139.196.7.26",
