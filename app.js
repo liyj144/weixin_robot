@@ -4,6 +4,9 @@ var config = require('config');
 var app = express();
 var http = require('http').Server(app);
 var API = require('wechat-api');
+var session = require("express-session");
+var cookieParser = require("cookie-parser");
+var uuid = require('node-uuid');
 var robot = require('./lib/robot');
 
 var menu_config = config.get('wx.wx_menu');
@@ -14,6 +17,7 @@ var robot_config = config.get("robot");
 var crawl_config = config.get("scrapy_mongo");
 var tuling_config = config.get("tuling_config");
 var encodingAESKey  = config.get('wx.encodingAESKey');
+
 
 var wx_config = {
     token: token,
@@ -26,8 +30,19 @@ api.createMenu(menu_config, function(err, result){
     console.log(result);
 });
 
+// session
+app.use(session({
+    secret: "12345",
+    name: "ROBOT_APP_ID",
+    resave: false,
+    saveUninitialized: true
+}));
 app.use(express.query());
 app.use('/wechat', wechat(wx_config, function (req, res, next) {
+    var uuid = req.session.uuid;
+    if(!uuid){
+        uuid = uuid.v1();
+    }
     var message = req.weixin;
     if(!message || !message.Content){
       res.reply("给我点提示嘛，亲...");
@@ -40,6 +55,7 @@ app.use('/wechat', wechat(wx_config, function (req, res, next) {
       });
     }else{
       process.nextTick(function(){
+        tuling_config['uuid'] = uuid;
         robot.tuling_rb(tuling_config, res, content);
       });
     }
