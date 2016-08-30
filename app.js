@@ -12,6 +12,7 @@ var token  = config.get('wx.token');
 var app_secret  = config.get('wx.app_secret');
 var robot_config = config.get("robot");
 var crawl_config = config.get("scrapy_mongo");
+var tuling_config = config.get("tuling_config");
 var encodingAESKey  = config.get('wx.encodingAESKey');
 
 var wx_config = {
@@ -39,7 +40,7 @@ app.use('/wechat', wechat(wx_config, function (req, res, next) {
       });
     }else{
       process.nextTick(function(){
-        robot.moli_rb(robot_config, res, content);
+        robot.tuling_rb(tuling_config, res, content);
       });
     }
     
@@ -48,7 +49,8 @@ app.use('/wechat', wechat(wx_config, function (req, res, next) {
 app.get('/crawl', function(req, res){
   process.nextTick(function(){
     //robot.crawl_query(crawl_config, res, req.query.q);
-    robot.moli_rb(robot_config, res, req.query.q);
+    robot.tuling_rb(tuling_config, res, req.query.q, true);
+    //robot.moli_rb(robot_config, res, req.query.q);
   })
 });
 

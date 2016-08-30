@@ -14,6 +14,10 @@
     "app_id": "7fa2dfd43b8c33c768ebe69922e4c92c",
     "app_secret": "ul1xwn79n8gf"
   },
+  "tuling_config": {
+    "url": "http://www.tuling123.com/openapi/api",
+    "app_id": "755c4c4ccc26401aa31c316e2e2933bd"
+  },
   "scrapy_mongo": {
     "host": "139.196.7.26",
     "port": "27017",
