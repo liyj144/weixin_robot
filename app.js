@@ -41,10 +41,6 @@ app.use(session({
 }));
 app.use(express.query());
 app.use('/wechat', wechat(wx_config, function (req, res, next) {
-    var userid = req.session.userid;
-    if(!userid){
-        req.session.userid = userid = crypto.createHash('md5').update(uuid.v1()).digest('hex');
-    }
     var message = req.weixin;
     if(!message || !message.Content){
       res.reply("给我点提示嘛，亲...");
@@ -57,7 +53,7 @@ app.use('/wechat', wechat(wx_config, function (req, res, next) {
       });
     }else{
       process.nextTick(function(){
-        tuling_config['userid'] = userid;
+        tuling_config['userid'] = message.FromUserName;
         robot.tuling_rb(tuling_config, res, content);
       });
     }
