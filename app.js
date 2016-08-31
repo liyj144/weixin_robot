@@ -7,6 +7,7 @@ var API = require('wechat-api');
 var session = require("express-session");
 var cookieParser = require("cookie-parser");
 var uuid = require('node-uuid');
+var crypto = require("crypto");
 var robot = require('./lib/robot');
 
 var menu_config = config.get('wx.wx_menu');
@@ -33,15 +34,16 @@ api.createMenu(menu_config, function(err, result){
 // session
 app.use(session({
     secret: "12345",
+    cookie: {maxAge: 240000 }, // 240s 生效时间
     name: "ROBOT_APP_ID",
     resave: false,
     saveUninitialized: true
 }));
 app.use(express.query());
 app.use('/wechat', wechat(wx_config, function (req, res, next) {
-    var uuid = req.session.uuid;
-    if(!uuid){
-        uuid = uuid.v1();
+    var userid = req.session.userid;
+    if(!userid){
+        req.session.userid = userid = crypto.createHash('md5').update(uuid.v1()).digest('hex');
     }
     var message = req.weixin;
     if(!message || !message.Content){
@@ -55,7 +57,7 @@ app.use('/wechat', wechat(wx_config, function (req, res, next) {
       });
     }else{
       process.nextTick(function(){
-        tuling_config['uuid'] = uuid;
+        tuling_config['userid'] = userid;
         robot.tuling_rb(tuling_config, res, content);
       });
     }
@@ -64,8 +66,13 @@ app.use('/wechat', wechat(wx_config, function (req, res, next) {
 // for test
 app.get('/crawl', function(req, res){
   process.nextTick(function(){
+    var userid = req.session.userid;
+    if(!userid){
+        req.session.userid = userid = crypto.createHash('md5').update(uuid.v1()).digest('hex');
+    }
+    res.send(userid);
     //robot.crawl_query(crawl_config, res, req.query.q);
-    robot.tuling_rb(tuling_config, res, req.query.q, true);
+    //robot.tuling_rb(tuling_config, res, req.query.q, true);
     //robot.moli_rb(robot_config, res, req.query.q);
   })
 });

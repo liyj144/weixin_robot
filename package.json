@@ -25,9 +25,13 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "cookie-parser": "^1.4.3",
+    "crypto": "0.0.3",
+    "express-session": "^1.14.1",
     "iconv-lite": "^0.4.13",
     "moment": "^2.14.1",
     "mongodb": "^2.2.8",
+    "node-uuid": "^1.4.7",
     "supervisor": "^0.11.0"
   }
 }
