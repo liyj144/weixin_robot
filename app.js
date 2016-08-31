@@ -25,7 +25,6 @@ var wx_config = {
     appid: app_id,
     encodingAESKey: encodingAESKey
 };
-
 var api = new API(app_id, app_secret);
 api.createMenu(menu_config, function(err, result){
     console.log(result);
@@ -54,6 +53,10 @@ app.use('/wechat', wechat(wx_config, function (req, res, next) {
     }else{
       process.nextTick(function(){
         tuling_config['userid'] = message.FromUserName;
+        // get access_token
+        //api.getAccessToken(function(err, data){
+        //    console.log(data);
+        //})
         robot.tuling_rb(tuling_config, res, content);
       });
     }
